@@ -20,8 +20,18 @@ class Biker(Base):
 class Helper(Base):
     __tablename__ = "helper"
     id = Column(Integer, primary_key = True)
-    author_id = Column(Integer, ForeignKey("biker.id"))
-    biker = relationship(Biker)    
+    biker_id = Column(Integer, ForeignKey("biker.id"))
+    biker = relationship(Biker)
+    taller_id = Column(Integer, ForeignKey("taller.id"))
+    taller = relationship(Taller)
+
+
+class Taller(Base):
+    __tablename__ = "taller"
+    id = Column(Integer, primary_key = True)
+    tallername = Column(String, unique = True)
+    name = Column(String)
+    email = Column(String,unique=True)
 
 class Blog(Base):
     __tablename__ = "Blog"
