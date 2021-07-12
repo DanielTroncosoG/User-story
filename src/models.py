@@ -34,19 +34,12 @@ class Taller(Base):
     email = Column(String,unique=True)
 
 class Blog(Base):
-    __tablename__ = "Blog"
-    id = Column(Integer, primary_key = True)
-    comment_text = Column(String)
-    author_id = Column(Integer, ForeignKey("biker.id"))
-    biker = relationship(Biker)
-    post_id = Column(Integer, ForeignKey("post.id"))
-    post = relationship(Post)
-
-class Post(Base):
     __tablename__ = "post"
     id = Column(Integer, primary_key = True)
     biker_id = Column(Integer, ForeignKey("biker.id"))
     biker = relationship(Biker)
+    taller_id = Column(Integer, ForeignKey("taller.id"))
+    taller = relationship(Taller)
 
 class Comment(Base):
     __tablename__ = "comment"
@@ -54,8 +47,8 @@ class Comment(Base):
     comment_text = Column(String)
     author_id = Column(Integer, ForeignKey("biker.id"))
     user = relationship(User)
-    post_id = Column(Integer, ForeignKey("post.id"))
-    post = relationship(Post)
+    blog_id = Column(Integer, ForeignKey("blog.id"))
+    blog = relationship(Blog)
 ## Draw from SQLAlchemy base
 try:
     result = render_er(Base, 'diagram.png')
